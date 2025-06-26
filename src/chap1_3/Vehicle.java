@@ -1,7 +1,7 @@
 package chap1_3;
 
 // 자동차 설계도
-public class vehicle {
+public class Vehicle {
 
     // ===========클래스의 구성 3 요소 =========== //
 
@@ -9,15 +9,12 @@ public class vehicle {
     // 1. 일반 속성 - 일반적으로 잘 안 바뀜
 
     String company; // 제조사
-
     String model; // 모델명
 
     // 2. 상태 속성 - 수시로 변하는 속성 //
 
     int currentSpeed;  // 현재 속도
-
     int fuel;     // 연료 잔량
-
     boolean isOn; // 시동 걸린 여부
 
     // 3.  복합 속성 (부품 속성)
@@ -45,7 +42,7 @@ public class vehicle {
 
 
     // String 2개를 받아서 초기화하는 생성자
-    vehicle(String c, String m) {
+    Vehicle(String c, String m) {
         company = c;
         model = m;
     }

@@ -3,8 +3,8 @@ package chap1_3;
 public class VehicleMain {
     public static void main(String[] args) {
 
-        vehicle grandeur = new vehicle("현대","그랜저");
-        vehicle panamera = new vehicle("마루쉐","파나메라");
+        Vehicle grandeur = new Vehicle("현대","그랜저");
+        Vehicle panamera = new Vehicle("마루쉐","파나메라");
 
         grandeur.powerOn();
 
