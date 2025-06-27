@@ -2,6 +2,13 @@ package chap1_5.member;
 
 import java.util.Arrays;
 
+/**
+ * Test 클래스는 회원 데이터를 관리하는 MemberRepository 객체를 활용하여
+ * 회원 추가, 검색 및 중복 여부 확인 등의 기능을 테스트하기 위한 클래스입니다.
+ * main 메서드를 통해 MemberRepository의 기능을 확인하고
+ * 그 결과를 출력합니다.
+ */
+
 public class Test {
     public static void main(String[] args) {
 

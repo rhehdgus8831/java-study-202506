@@ -2,6 +2,21 @@ package chap1_5.member;
 
 import java.util.Scanner;
 
+/**
+ * 회원 관리를 담당하는 컨트롤러 클래스입니다.
+ *
+ * 이 클래스는 사용자와의 상호작용을 처리하며, 사용자가 입력한 데이터를 기반으로 회원 정보를 관리하거나
+ * 관련 작업을 수행하기 위해 MemberRepository와 협력합니다.
+ *
+ * 제공 기능:
+ * 1. 회원 정보 등록
+ * 2. 전체 회원 조회
+ * 3. 개별 회원 조회
+ * 4. 회원 정보 수정
+ * 5. 회원 삭제
+ * 6. 삭제된 회원 정보 복구
+ * 7. 프로그램 종료
+ */
 // 역할: 회원관리 앱의 입출력을 담당
 public class MemberController {
 
@@ -63,6 +78,23 @@ public class MemberController {
         prompt("======== 계속하시려면 Enter... =========");
     }
 
+    /**
+     * 새로운 회원을 등록하는 메서드입니다.
+     *
+     * 이 메서드는 사용자로부터 이메일, 패스워드, 이름, 성별, 나이를 입력받아
+     * 회원 정보를 생성한 뒤, {@code MemberRepository}에 저장합니다.
+     *
+     * 기능:
+     * 1. 이메일 중복 확인: {@code checkDuplicateEmail()} 메서드를 사용하여 중복된 이메일을 방지합니다.
+     * 2. 비밀번호와 이름 입력: {@code prompt()} 메서드를 사용하여 사용자로부터 입력받습니다.
+     * 3. 성별 입력: {@code inputCorrectGender()} 메서드를 사용하여 유효한 성별 값을 확인하고 입력받습니다.
+     * 4. 나이 입력: 사용자로부터 숫자로 된 나이를 입력받습니다.
+     * 5. 회원 정보 생성 및 저장: 입력받은 정보를 기반으로 새로운 회원 객체를 생성하고, {@code addMember()} 메서드를 사용해 저장합니다.
+     *
+     * 결과:
+     * 회원 정보가 성공적으로 저장되면 회원 가입 완료 메시지를 출력합니다.
+     */
+
     void signUp() {
         System.out.println("\n# 회원 정보 등록을 시작합니다.");
         String email = checkDuplicateEmail();
@@ -110,6 +142,7 @@ public class MemberController {
      *
      * @return Gender 사용자가 입력한 성별을 나타내는 열거형 값 (MALE 또는 FEMALE)
      */
+
     Gender inputCorrectGender() {
         while (true) {
             String genderStr = prompt("# 성별 [M/F] : "); // man
@@ -135,6 +168,7 @@ public class MemberController {
      * 1. 회원 목록 데이터를 조회합니다.
      * 2. 콘솔에 회원 정보를 출력합니다.
      */
+
     void showAllMembers() {
         System.out.println("\n# 전체 회원 정보를 조회합니다.");
         Member[] members = mr.getMembers();
@@ -148,6 +182,7 @@ public class MemberController {
      *
      * @return 사용자가 선택한 메뉴 번호를 나타내는 문자열
      */
+
     String showMenu() {
         System.out.printf("\n#####  회원 관리 시스템 (현재 회원 수: %d명)  #####\n", mr.size());
         System.out.println("* 1. 회원 정보 등록하기");
@@ -167,6 +202,7 @@ public class MemberController {
      * @param message 입력을 요청하며 출력할 메시지
      * @return 사용자가 입력한 문자열
      */
+
     String prompt(String message) {
         System.out.print(message);
         return sc.nextLine();
