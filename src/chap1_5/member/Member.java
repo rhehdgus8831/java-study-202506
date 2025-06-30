@@ -68,4 +68,12 @@ public class Member {
         System.out.printf("이름: %s, 이메일: %s, 성별: %s, 나이: %d세, 가입일: %s\n",
                 memberName, email, gender == Gender.MALE ? "남자" : "여자", age, formattedDate);
     }
+
+    public void changeNewPassword(String newPassword) {
+        this.password = newPassword;
+    }
+
+    public boolean isPasswordMatch(String inputPassword) {
+         return this.password.equals(inputPassword);
+    }
 }

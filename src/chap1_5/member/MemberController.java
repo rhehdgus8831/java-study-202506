@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 /**
  * 회원 관리를 담당하는 컨트롤러 클래스입니다.
- *
+ * <p>
  * 이 클래스는 사용자와의 상호작용을 처리하며, 사용자가 입력한 데이터를 기반으로 회원 정보를 관리하거나
  * 관련 작업을 수행하기 위해 MemberRepository와 협력합니다.
- *
+ * <p>
  * 제공 기능:
  * 1. 회원 정보 등록
  * 2. 전체 회원 조회
@@ -51,21 +51,20 @@ public class MemberController {
                 showAllMembers();
                 break;
             case "3":
-                System.out.println("\n# 회원 개별조회를 시작합니다.");
+                showDetailMember();
                 break;
             case "4":
-                System.out.println("\n# 회원 패스워드를 수정합니다.");
+                changePassword();
                 break;
             case "5":
-                // 이메일 입력받고 있으면 패스워드도 입력  받아서 삭제
-                System.out.println("\n# 회원 정보를 삭제합니다.");
+                if (mr.size() == 0){
+                    System.out.println("# 삭제할 회원이 없습니다.");
+                    return;
+                }
+                deleteMember();
                 break;
             case "6":
-                // hint :
-                // 1. 배열을 2개 관리함
-                // 2. 논리적 삭제를 구현 (실제로 배열에 지우는게 아니라 지우는 척함)
-
-                System.out.println("\n# 삭제된 회원 정보를 복구합니다.");
+                restoreMember();
                 break;
             case "7":
                 System.out.println("\n# 프로그램을 종료합니다.");
@@ -78,19 +77,70 @@ public class MemberController {
         prompt("======== 계속하시려면 Enter... =========");
     }
 
+    void deleteMember() {
+        // 이메일 입력받고 있으면 패스워드도 입력  받아서 삭제
+        System.out.println("\n# 회원 정보를 삭제합니다.");
+        Member foundMember = findMember("삭제");
+        if (foundMember != null) {
+            // 삭제 전에 패스워드를 확인
+            String inputPassword = prompt("# 비밀번호:");
+            if (foundMember.isPasswordMatch(inputPassword)) {
+                // 실제 삭제 진행
+                mr.removeMember(foundMember.email);
+                System.out.println("\n # 실제 삭제가 완료되었습니다! ");
+            } else {
+                System.out.println("\n # 비밀번호가 틀렸습니다. 삭제를 취소합니다.");
+            }
+        } else {
+            System.out.println("\n # 조회 결과가 없습니다 !");
+        }
+
+    }
+
+    void changePassword() {
+        System.out.println("\n# 회원 패스워드를 수정합니다.");
+        Member foundMember = findMember("수정");
+        if (foundMember != null) {
+            // 비밀번호 수정 진행
+            String newPassword = prompt("# 새 비밀번호:");
+
+            // 실질적인 데이터 수정 처리
+            foundMember.changeNewPassword(newPassword);
+            System.out.println("\n# 변경이 완료되었습니다.");
+        } else {
+            System.out.println("\n 조회 결과가 없습니다!");
+        }
+    }
+
+    Member findMember(String message) {
+        String email = prompt("# %s 대상의 이메일:".formatted(message));
+        return mr.findMemberByEmail(email);
+    }
+
+
+    void showDetailMember() {
+        System.out.println("\n# 회원 개별조회를 시작합니다.");
+        Member foundMember = findMember("조회");
+        if (foundMember != null) {
+            foundMember.inform();
+        } else {
+            System.out.println("\n# 조회 결과가 없습니다.");
+        }
+    }
+
     /**
      * 새로운 회원을 등록하는 메서드입니다.
-     *
+     * <p>
      * 이 메서드는 사용자로부터 이메일, 패스워드, 이름, 성별, 나이를 입력받아
      * 회원 정보를 생성한 뒤, {@code MemberRepository}에 저장합니다.
-     *
+     * <p>
      * 기능:
      * 1. 이메일 중복 확인: {@code checkDuplicateEmail()} 메서드를 사용하여 중복된 이메일을 방지합니다.
      * 2. 비밀번호와 이름 입력: {@code prompt()} 메서드를 사용하여 사용자로부터 입력받습니다.
      * 3. 성별 입력: {@code inputCorrectGender()} 메서드를 사용하여 유효한 성별 값을 확인하고 입력받습니다.
      * 4. 나이 입력: 사용자로부터 숫자로 된 나이를 입력받습니다.
      * 5. 회원 정보 생성 및 저장: 입력받은 정보를 기반으로 새로운 회원 객체를 생성하고, {@code addMember()} 메서드를 사용해 저장합니다.
-     *
+     * <p>
      * 결과:
      * 회원 정보가 성공적으로 저장되면 회원 가입 완료 메시지를 출력합니다.
      */
@@ -117,7 +167,7 @@ public class MemberController {
 
     /**
      * 사용자로부터 이메일을 입력받고, 해당 이메일이 중복되지 않을 때까지 반복하여 입력받는 메서드입니다.
-     *
+     * <p>
      * 이 메서드는 이메일이 중복되지 않은 경우 해당 이메일을 반환합니다.
      *
      * @return 사용자로부터 입력받은 중복되지 않은 이메일 문자열
@@ -135,7 +185,7 @@ public class MemberController {
 
     /**
      * 사용자로부터 올바른 성별을 입력받아 반환하는 메서드입니다.
-     *
+     * <p>
      * 이 메서드는 지속적으로 사용자에게 "M" 또는 "F"를 입력하도록 요청하며,
      * 유효한 입력 값을 받을 때까지 반복합니다. 입력 값이 대소문자 구분 없이
      * 처리되며, "M"은 MALE, "F"는 FEMALE로 매핑됩니다.
@@ -160,10 +210,10 @@ public class MemberController {
 
     /**
      * 전체 회원 목록을 출력하는 메서드입니다.
-     *
+     * <p>
      * 이 메서드는 {@code MemberRepository} 객체를 통해 저장된 모든 회원 정보를 가져와
      * 출력 형식에 따라 콘솔에 표시합니다.
-     *
+     * <p>
      * 기능:
      * 1. 회원 목록 데이터를 조회합니다.
      * 2. 콘솔에 회원 정보를 출력합니다.
@@ -207,4 +257,17 @@ public class MemberController {
         System.out.print(message);
         return sc.nextLine();
     }
+
+    void restoreMember() {
+        String inputEmail = prompt("# 복구 대상의 이메일: ");
+        // 복구 대상 탐색 및 복구 처리
+        boolean flag = mr.restore(inputEmail);
+
+        if (flag) {
+            System.out.println("\n# 복구처리가 완료되었습니다.");
+        } else {
+            System.out.println("\n# 복구에 실패했습니다.");
+        }
+    }
+
 }
