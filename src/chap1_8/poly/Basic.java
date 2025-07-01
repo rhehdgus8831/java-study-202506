@@ -1,0 +1,32 @@
+package chap1_8.poly;
+
+class A {} // 클래스를 더 만드려면 디폴트로 만들어야함
+class B extends A {}
+class C extends A {}
+class D extends B {}
+class E extends C {}
+/*
+        Object
+          |
+          A
+        /   \
+       B    C
+       |    |
+       D    E
+ */
+public class Basic {
+
+    /*
+       다형성 : 객체가 다양한 형태(type)를 가질 수 있는 성질
+       - 자식 객체는 상속관계에 있는 타입을 사용할 수 있음
+    */
+    public static void main(String[] args) {
+
+        A x1 = new A();
+        A x2 = new B();
+        A x3 = new C();
+        Object x4 = new D(); // B,A,Object도 사용이 가능함 (부모,조상까지)
+        C x5 = new E();
+
+    }
+}
