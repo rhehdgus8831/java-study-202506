@@ -1,30 +1,30 @@
-package chap1_9.satic_;
+package chap1_9.static_;
 
-import static chap1_9.satic_.util.InputUtils.prompt;
+import static chap1_9.static_.util.InputUtils.prompt;
 
 public class Main {
     public static void main(String[] args) {
 
-        Count.m1();
+        chap1_9.static_.Count.m1();
 
-        Count.x = 100;
+        chap1_9.static_.Count.x = 100;
 
         // 원주율 : 샤프계산기의 원주율,삼성계산기의 원주율
         System.out.println(Math.PI);
 
-        Count c1 = new Count();
+        chap1_9.static_.Count c1 = new chap1_9.static_.Count();
         c1.m2();
 
 
        //  c1.x++;
-        Count.x++;
+        chap1_9.static_.Count.x++;
         c1.y++;
 
-        Count c2 = new Count();
+        chap1_9.static_.Count c2 = new chap1_9.static_.Count();
         c2.m2();
 
         // c2.x++;
-        Count.x++;
+        chap1_9.static_.Count.x++;
         c2.y++;
 
         c2.y = 100;
@@ -35,9 +35,9 @@ public class Main {
 
         System.out.println(" ======================= " );
 
-        double result = Calculator.calcCircleArea(10);
+        double result = chap1_9.static_.Calculator.calcCircleArea(10);
 
-        Calculator sharpCalc = new Calculator();
+        chap1_9.static_.Calculator sharpCalc = new chap1_9.static_.Calculator();
         sharpCalc.customizeColor("노랑색");
 
         Math.random();

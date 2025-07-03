@@ -1,4 +1,4 @@
-package chap1_9.satic_;
+package chap1_9.static_;
 
 public class Calculator {
 
