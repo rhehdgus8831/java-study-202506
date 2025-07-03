@@ -69,7 +69,7 @@ public class Member {
                 memberName, email, gender == Gender.MALE ? "남자" : "여자", age, formattedDate);
     }
 
-    public void changeNewPassword(String newPassword) {
+    public void updateNewPassword(String newPassword) {
         this.password = newPassword;
     }
 

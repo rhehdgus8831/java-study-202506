@@ -1,5 +1,7 @@
 package chap1_5.member;
 
+import static chap1_5.member.Gender.*;
+
 /**
  * MemberRepository 클래스는 Member 객체를 관리하는 저장소 역할을 합니다.
  * CRUD 작업을 수행할 수 있는 메서드를 제공하며 회원 추가,
@@ -22,9 +24,9 @@ public class MemberRepository {
 
     MemberRepository() {
         memberList = new Member[] {
-                new Member(15, "abc123@def.com", "1234", "콩벌레", Gender.MALE)
-                , new Member(25, "fff@ggg.com", "5678", "팥죽이", Gender.FEMALE)
-                , new Member(35, "xxx@ccc.com", "9876", "카레빵", Gender.FEMALE)
+                new Member(15, "abc123@def.com", "1234", "콩벌레", MALE)
+                , new Member(25, "fff@ggg.com", "5678", "팥죽이", FEMALE)
+                , new Member(35, "xxx@ccc.com", "9876", "카레빵", FEMALE)
         };
 
         restoreList = new Member[0];

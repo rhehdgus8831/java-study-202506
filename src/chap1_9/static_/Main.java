@@ -5,7 +5,7 @@ import static chap1_9.static_.util.InputUtils.prompt;
 public class Main {
     public static void main(String[] args) {
 
-        chap1_9.static_.Count.m1();
+        Count.m1();
 
         chap1_9.static_.Count.x = 100;
 
@@ -35,7 +35,7 @@ public class Main {
 
         System.out.println(" ======================= " );
 
-        double result = chap1_9.static_.Calculator.calcCircleArea(10);
+        double result = Calculator.calcCircleArea(10);
 
         chap1_9.static_.Calculator sharpCalc = new chap1_9.static_.Calculator();
         sharpCalc.customizeColor("노랑색");
