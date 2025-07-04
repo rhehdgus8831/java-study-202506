@@ -33,7 +33,7 @@ public class StandardIo {
         // java 5부터 가능
         String message2 = String.format("오늘은 %d월 %d일입니다." ,month, day);
         System.out.println("message2 = " + message2);
-        
+
         // 표준 입력
         Scanner scanner = new Scanner(System.in); // 최초 1번
 
