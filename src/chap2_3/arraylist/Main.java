@@ -33,7 +33,7 @@ public class Main {
         int index1 = foods.indexOf("짬뽕");
         System.out.println("index1 = " + index1);
 
-        foods.clear();
+        // foods.clear();
         System.out.println(foods);
 
         System.out.println("=============");
@@ -67,6 +67,12 @@ public class Main {
         hobbies.clear();
 
         System.out.println(hobbies);
+
+
+        for (String f : foods) {
+            System.out.println("f = " + f);
+
+        }
 
     }
 }
