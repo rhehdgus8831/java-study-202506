@@ -1,4 +1,4 @@
-package chap2_4.collection.songAnswer;
+package chap2_4.collection.songPractice;
 
 public class Run {
 
