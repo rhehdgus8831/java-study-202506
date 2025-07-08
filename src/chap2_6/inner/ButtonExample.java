@@ -11,6 +11,8 @@ public class ButtonExample {
         JFrame frame = new JFrame("익명 클래스 예제");
         JButton button = new JButton("클릭하세요");
 
+        // button.addActionListener(e -> JOptionPane.showMessageDialog(null, "버튼이 클릭됨!"));
+
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
