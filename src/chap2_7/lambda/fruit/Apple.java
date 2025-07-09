@@ -6,6 +6,8 @@ public class Apple {
 
     private int weight; // 무게
     private Color color; // 사과의 색상
+    private int sweet; // 당도
+    private String origin; // 원산지
 
     public Apple(int weight, Color color) {
         this.weight = weight;
