@@ -84,39 +84,22 @@ public class Main {
 
         System.out.println("===============");
 
-        List<Integer> weightList = mappingApples(appleBasket, new AppleFunction<Integer>() {
-
-            @Override
-            public Integer apply(Apple apple) {
-                return apple.getWeight();
-            }
-        });
+        List<Integer> weightList = mappingApples(appleBasket, Apple::getWeight); // 메서드 참조
 
         System.out.println("weightList = " + weightList);
+
 
         System.out.println("============");
 
         // 색상 문자열의 첫글자만 모아서 리턴
-        List<Character> characterList = mappingApples(appleBasket, new AppleFunction<Character>() {
-
-            @Override
-            public Character apply(Apple apple) {
-                return apple.getColor().toString().charAt(0);
-            }
-        });
+        List<Character> characterList = mappingApples(appleBasket, Apple::getColorFirstCharacter);
 
         System.out.println("characterList = " + characterList);
 
         System.out.println("=============");
 
         // 각 사과별로 "xx색 사과는 xxg입니다." 라는 문자열 목록을 리턴
-        List<String> stringList = mappingApples(appleBasket, new AppleFunction<String>() {
-            @Override
-            public String apply(Apple apple) {
-                return String.format("%s색 사과는 %dg입니다.", apple.getColor().toString(), apple.getWeight());
-            }
-        });
-
+        List<String> stringList = mappingApples(appleBasket, Apple::getAppleDescription);
         System.out.println("stringList = " + stringList);
 
         System.out.println("=============");
@@ -135,29 +118,31 @@ public class Main {
             ]
          */
 
-        List<Map<String, Object>> mapList = mappingApples(appleBasket, new AppleFunction<Map<String, Object>>() {
-            @Override
-            public Map<String, Object> apply(Apple apple) {
-                return Map.of(
-                        "first", apple.getColor().toString().charAt(0),
-                        "weight", apple.getWeight() / 1000.0
-                );
-            }
-        });
+        List<Map<String, Object>> mapList = mappingApples(appleBasket, apple -> Map.of(
+                "first", apple.getColor().toString().charAt(0),
+                "weight", apple.getWeight() / 1000.0
+        ));
         System.out.println(mapList);
         System.out.println(mapList.get(0).get("weight"));
         double weight = (double) mapList.get(0).get("weight");
 
         System.out.println("==================");
 
-        List<FormatApple> formatApples = mappingApples(appleBasket, new AppleFunction<FormatApple>() {
-            @Override
-            public FormatApple apply(Apple apple) {
-                return new FormatApple(apple);
-            }
-        });
+        List<FormatApple> formatApples = mappingApples(appleBasket, FormatApple::new);
         System.out.println("formatApples = " + formatApples);
         double weight1 = formatApples.get(0).getWeight();
+
+        System.out.println("==================");
+
+        List<Integer> IntegerList = map(numbers, n -> n + 100);
+        System.out.println("IntegerList = " + IntegerList);
+
+        List<String> foodMapList = map(
+                List.of("닭강정", "통닭", "닭백숙","오리백숙","김치찌개")
+                , str -> str + " 맛있어 !"
+        );
+        System.out.println("foodMapList = " + foodMapList);
+
 
     }// end main
 
